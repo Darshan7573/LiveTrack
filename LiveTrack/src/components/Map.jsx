@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet'
 import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 
 const vehicleIcon = new L.Icon({
@@ -13,6 +13,25 @@ const vehicleIcon = new L.Icon({
 
 const Map = () => {
     const [vehiclePath, setVehiclePath] = useState([])
+
+    useEffect(() => {
+        const fetchedData = async () => {
+            const res = await axios.get('http://localhost:3000/api/vehicle-data')
+            const path = res.data.map(coord => ({
+                lat: coord.latitude,
+                lng: coord.longitude
+            }))
+            setVehiclePath(path)
+        }
+        fetchedData()
+
+        //seting the time interval to fetch data every few seconds
+
+        const interval = setInterval(fetchedData, 5000)
+
+        return () => clearInterval(interval)
+    }, [])
+
 
     return (
         <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
