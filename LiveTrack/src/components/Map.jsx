@@ -20,6 +20,23 @@ const startingIcon = new L.Icon({
 
 const Map = () => {
     const [vehiclePath, setVehiclePath] = useState([])
+    const [userPosition, setUserPosition] = useState([13.000694, 77.495999]);
+
+
+    useEffect(() => {
+        const getGeoLocation = () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords
+                        setUserPosition([latitude, longitude])
+                    }
+                )
+            }
+        }
+
+        getGeoLocation()
+    }, [])
 
     useEffect(() => {
         const fetchedData = async () => {
@@ -43,7 +60,7 @@ const Map = () => {
     return (
         <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Vehicle Movement Tracking System</h2>
-            <MapContainer className='h-screen w-full' center={[13.000694, 77.495999]} zoom={15} scrollWheelZoom={true}>
+            <MapContainer className='h-screen w-full' center={userPosition} zoom={15} scrollWheelZoom={true}>
                 <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
