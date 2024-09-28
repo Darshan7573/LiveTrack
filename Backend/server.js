@@ -27,7 +27,7 @@ let simulateMovment = () => {
     })
 
     //Deletes the vehicle Data when the data is more than 100
-    if (vehicleData.length > 100) {
+    if (vehicleData.length > 5) {
         vehicleData.shift()
     }
 }
