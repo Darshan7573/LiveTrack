@@ -4,7 +4,9 @@ import cors from 'cors'
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'https://livetrackvehicle.netlify.app/'
+}))
 
 let vehicleData = [
     { latitude: 13.000694, longitude: 77.495999, timestamp: "2024-09-28T07:00:00Z" }, //Home

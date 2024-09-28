@@ -18,6 +18,8 @@ const startingIcon = new L.Icon({
     iconAnchor: [20, 33]
 })
 
+const url = "https://livetrack-ihay.onrender.com"
+
 const Map = () => {
     const [vehiclePath, setVehiclePath] = useState([])
     const [userPosition, setUserPosition] = useState([13.000694, 77.495999]);
@@ -40,7 +42,7 @@ const Map = () => {
 
     useEffect(() => {
         const fetchedData = async () => {
-            const res = await axios.get('https://livetrack-ihay.onrender.com/api/vehicle-data')
+            const res = await axios.get(`${url}/api/vehicle-data`)
             const path = res.data.map(coord => ({
                 lat: coord.latitude,
                 lng: coord.longitude
