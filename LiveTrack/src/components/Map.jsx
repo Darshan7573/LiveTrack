@@ -3,12 +3,19 @@ import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
-import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import carIcon from '/public/3d-car.png'
+import stratingIcon from '/public/map-marker.png'
 
 const vehicleIcon = new L.Icon({
-    iconUrl: markerIcon,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41]
+    iconUrl: carIcon,
+    iconSize: [50, 41],
+    iconAnchor: [30, 33]
+})
+
+const startingIcon = new L.Icon({
+    iconUrl: stratingIcon,
+    iconSize: [35, 35],
+    iconAnchor: [20, 33]
 })
 
 const Map = () => {
@@ -36,9 +43,16 @@ const Map = () => {
     return (
         <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Vehicle Movement Tracking System</h2>
-            <MapContainer className='h-96 w-full' center={[17.385004, 78.486671]} zoom={15} scrollWheelZoom={true}>
+            <MapContainer className='h-screen w-full' center={[13.000694, 77.495999]} zoom={15} scrollWheelZoom={true}>
                 <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+                />
+
+                {vehiclePath.length > 0 && (
+                    <Marker position={vehiclePath[0]} icon={startingIcon} />
+                )}
+
                 {vehiclePath.length > 0 && (
                     <Marker position={vehiclePath[vehiclePath.length - 1]} icon={vehicleIcon} />
                 )}
