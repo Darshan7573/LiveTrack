@@ -3,8 +3,8 @@ import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
-import carIcon from '/public/3d-car.png'
-import stratingIcon from '/public/map-marker.png'
+import carIcon from '/3d-car.png'
+import stratingIcon from '/map-marker.png'
 
 const vehicleIcon = new L.Icon({
     iconUrl: carIcon,
