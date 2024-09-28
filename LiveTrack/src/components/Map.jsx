@@ -60,26 +60,29 @@ const Map = () => {
     return (
         <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Vehicle Movement Tracking System</h2>
-            <MapContainer className='h-screen w-full' center={userPosition} zoom={15} scrollWheelZoom={true}>
-                <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            <div className='h-screen w-full'>
+                <MapContainer className='h-full w-full' center={userPosition} zoom={15} scrollWheelZoom={true}>
+                    <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
-                />
+                    />
 
-                {vehiclePath.length > 0 && (
-                    <Marker position={vehiclePath[0]} icon={startingIcon} />
-                )}
+                    {vehiclePath.length > 0 && (
+                        <Marker position={vehiclePath[0]} icon={startingIcon} />
+                    )}
 
-                {vehiclePath.length > 0 && (
-                    <Marker position={vehiclePath[vehiclePath.length - 1]} icon={vehicleIcon} />
-                )}
+                    {vehiclePath.length > 0 && (
+                        <Marker position={vehiclePath[vehiclePath.length - 1]} icon={vehicleIcon} />
+                    )}
 
-                (//Draws the path)
+                    {/* Draws the path */}
 
-                {vehiclePath.length > 1 && (
-                    <Polyline positions={vehiclePath} color='red' />
-                )}
-            </MapContainer>
+                    {vehiclePath.length > 1 && (
+                        <Polyline positions={vehiclePath} color='red' />
+                    )}
+                </MapContainer>
+            </div>
+
         </div>
     )
 }
