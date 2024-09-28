@@ -5,7 +5,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: 'https://66f7c35e6d45dc93d7fff5a0--livetrackvehicle.netlify.app/'
+    origin: 'https://66f7c35e6d45dc93d7fff5a0--livetrackvehicle.netlify.app'
 }))
 
 let vehicleData = [
