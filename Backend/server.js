@@ -6,14 +6,32 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const vehicleData = [
+let vehicleData = [
     { latitude: 13.000694, longitude: 77.495999, timestamp: "2024-09-28T07:00:00Z" }, //Home
-    { latitude: 12.9716, longitude: 77.5946, timestamp: "2024-09-28T08:00:00Z" }, // Bengaluru
-    { latitude: 13.3372, longitude: 77.6955, timestamp: "2024-09-28T09:00:00Z" }, // Nandi Hills
-    { latitude: 14.2816, longitude: 77.3700, timestamp: "2024-09-28T11:00:00Z" }, // Anantapur
-    { latitude: 15.8281, longitude: 78.0373, timestamp: "2024-09-28T13:00:00Z" }, // Kurnool
-    { latitude: 17.3850, longitude: 78.4867, timestamp: "2024-09-28T15:00:00Z" }, // Hyderabad
 ];
+
+let currentPosition = { latitude: 13.000694, longitude: 77.495999 };
+
+
+//Dynamically updating the vehicleData
+let simulateMovment = () => {
+    currentPosition.latitude += (Math.random() - 0.5) * 0.01,
+        currentPosition.longitude += (Math.random() - 0.5) * 0.01
+
+    vehicleData.push({
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
+        timestamp: new Date().toISOString()
+    })
+
+    //Deletes the vehicle Data when the data is more than 100
+    if (vehicleData.length > 100) {
+        vehicleData.shift()
+    }
+}
+
+setInterval(simulateMovment, 5000)
+
 
 
 app.get('/api/vehicle-data', (req, res) => {
