@@ -63,7 +63,7 @@ const Map = () => {
             if (vehiclePath.length > 0) {
                 map.flyTo(vehiclePath[vehiclePath.length - 1], map.getZoom())
             }
-        }, [vehiclePath, map])
+        }, [map])
 
         return null;
     }
@@ -71,7 +71,7 @@ const Map = () => {
 
     return (
         <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Vehicle Movement Tracking System</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Vehicle Movement Tracking System</h2>
             <div className='h-screen w-full'>
                 {vehiclePath.length === 0 ? (
                     <div>Loading vehicle data...</div>
