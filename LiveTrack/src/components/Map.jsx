@@ -40,7 +40,7 @@ const Map = () => {
 
     useEffect(() => {
         const fetchedData = async () => {
-            const res = await axios.get('http://localhost:3000/api/vehicle-data')
+            const res = await axios.get('https://livetrack-ihay.onrender.com/api/vehicle-data')
             const path = res.data.map(coord => ({
                 lat: coord.latitude,
                 lng: coord.longitude
